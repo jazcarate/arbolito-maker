@@ -13,21 +13,23 @@
 
 $valores = explode(" ", htmlspecialchars($_GET["text"]));
 $tamanio = $valores[0]+5;
-$icono = $valores[1];
-$centro = $valores[2];
+$ancho = $valores[1];
+$icono = $valores[2];
+$centro = $valores[3];
 
-$data = [
-    "text" => dibjar(triangular($tamanio, $icono, $centro), $icono, $centro)
-];
+$data = array(
+    'text' => dibjar(triangular($tamanio, $icono, $centro), $icono, $centro),
+    'response_type' => 'in_channel',
+);
 header('Content-Type: application/json');
 echo json_encode($data);
 
 
-function triangular($tamanio){
+function triangular($tamanio, $ancho){
     $n = $i = $tamanio;
     $ret = "";
     while ($i--){
-        $ret .= tabear($i);
+        $ret .= tabear($i * $ancho);
         
         if($i == floor($n/2)){
             $tmp = str_repeat('* ', $n - $i)."\n";

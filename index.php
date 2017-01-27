@@ -38,7 +38,7 @@ function triangular($tamanio){
         
         if($i == floor($n/2)){
             $tmp = str_repeat(PINO.' ', $n - $i)."\n";
-            $tmp[$n-$i-1]=CENTRO;
+            $tmp[$n-$i-($n-$i)%2]=CENTRO;
             $ret .= $tmp;
         } else {
             $ret .= str_repeat('* ', $n - $i)."\n";

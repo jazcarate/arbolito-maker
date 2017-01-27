@@ -18,7 +18,7 @@ $icono = $valores[2];
 $centro = $valores[3];
 
 $data = array(
-    'text' => dibjar(triangular($tamanio, $icono, $centro), $icono, $centro),
+    'text' => dibjar(triangular($tamanio, $ancho), $icono, $centro),
     'response_type' => 'in_channel',
 );
 header('Content-Type: application/json');
@@ -39,7 +39,7 @@ function triangular($tamanio, $ancho){
             $ret .= str_repeat('* ', $n - $i)."\n";
         }
     }
-    $ret .= tabear($n).'*';
+    $ret .= tabear($n*$ancho).'*';
     return $ret;
 }
 

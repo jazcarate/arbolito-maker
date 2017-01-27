@@ -17,7 +17,7 @@ const PINO = '*';
 
 
 $valores = explode(" ", htmlspecialchars($_GET["text"]));
-$tamanio = $valores[0]+5;
+$tamanio = min($valores[0]+5, 20);
 $icono = $valores[1];
 $centro = $valores[2];
 

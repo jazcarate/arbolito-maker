@@ -10,36 +10,41 @@
 // text=94070
 // response_url=https://hooks.slack.com/commands/1234/5678
 
+const ANCHO = 3;
+
+const CENTRO = '/';
+const PINO = '*';
+
 
 $valores = explode(" ", htmlspecialchars($_GET["text"]));
 $tamanio = $valores[0]+5;
-$ancho = $valores[1];
-$icono = $valores[2];
-$centro = $valores[3];
+$icono = $valores[1];
+$centro = $valores[2];
+
 
 $data = array(
-    'text' => dibjar(triangular($tamanio, $ancho), $icono, $centro),
+    'text' => dibjar(triangular($tamanio), $icono, $centro),
     'response_type' => 'in_channel',
 );
 header('Content-Type: application/json');
 echo json_encode($data);
 
 
-function triangular($tamanio, $ancho){
+function triangular($tamanio){
     $n = $i = $tamanio;
     $ret = "";
     while ($i--){
-        $ret .= tabear($i * $ancho);
+        $ret .= tabear($i*ANCHO);
         
         if($i == floor($n/2)){
-            $tmp = str_repeat('* ', $n - $i)."\n";
-            $tmp[($n-$i)/2+1]='c';
+            $tmp = str_repeat(PINO.' ', $n - $i)."\n";
+            $tmp[$n-$i-1]=CENTRO;
             $ret .= $tmp;
         } else {
             $ret .= str_repeat('* ', $n - $i)."\n";
         }
     }
-    $ret .= tabear(($n-1)*$ancho).'*';
+    $ret .= tabear($n*ANCHO-2).'*';
     return $ret;
 }
 
@@ -48,6 +53,6 @@ function tabear($i){
 }
 
 function dibjar($txt, $icono, $centro){
-    return str_replace('c', $centro, str_replace('*', $icono, $txt));
+    return str_replace(CENTRO, $centro, str_replace(PINO, $icono, $txt));
 }
 ?>

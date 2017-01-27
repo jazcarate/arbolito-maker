@@ -44,7 +44,7 @@ function triangular($tamanio){
             $ret .= str_repeat('* ', $n - $i)."\n";
         }
     }
-    $ret .= tabear($n*ANCHO-2).'*';
+    $ret .= tabear(($n-1)*ANCHO).'*';
     return $ret;
 }
 
